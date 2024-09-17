@@ -25,13 +25,60 @@ function numberToPlay(number = randomNumber02()) {
   return play;
 }
 
-function getPlayerChoice (){
-    let choice = prompt("Write your play! (Rock, paper or scissors)");
-    console.log(choice.toLowerCase());
-    return choice;
+function getPlayerChoice() {
+  let choice = prompt("Write your play! (Rock, paper or scissors)");
+  // console.log(choice.toLowerCase());
+  return choice.toLowerCase();
 }
 
-function gameFlow (){
-    let player = getPlayerChoice();
+function comparePlays(playerPlay, computerPlay) {
+  switch (playerPlay) {
+    case "rock":
+      switch (computerPlay) {
+        case "paper":
+          return 0;
+          break;
+        case "scissors":
+          return 1;
+          break;
+        default:
+          return 2;
+      }
+      break;
+    case "paper":
+      switch (computerPlay) {
+        case "scissors":
+          return 0;
+          break;
+        case "rock":
+          return 1;
+          break;
+        default:
+          return 2;
+      }
+      break;
+    case "scissors":
+      switch (computerPlay) {
+        case "rock":
+          return 0;
+          break;
+        case "paper":
+          return 1;
+          break;
+        default:
+          return 2;
+      }
+      break;
+  }
+}
 
+function gameFlow() {
+  let player = getPlayerChoice();
+
+  if (player === "rock" || player === "paper" || player === "scissors") {
+    let computer = numberToPlay();
+    // Call a function that compares player and computer.
+  } else {
+    alert("Invalid play. Please try again");
+  }
 }
