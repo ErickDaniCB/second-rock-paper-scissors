@@ -24,3 +24,14 @@ function numberToPlay(number = randomNumber02()) {
   }
   return play;
 }
+
+function getPlayerChoice (){
+    let choice = prompt("Write your play! (Rock, paper or scissors)");
+    console.log(choice.toLowerCase());
+    return choice;
+}
+
+function gameFlow (){
+    let player = getPlayerChoice();
+
+}
