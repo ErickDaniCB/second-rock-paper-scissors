@@ -72,13 +72,27 @@ function comparePlays(playerPlay, computerPlay) {
   }
 }
 
-function gameFlow() {
+function promptRoundWinner(result) {
+  switch (result) {
+    case 0:
+      console.log("Computer wins the round!");
+      break;
+    case 1:
+      console.log("Player wins the round!");
+    default:
+      console.log("Tie!");
+  }
+}
+
+function gameRound() {
   let player = getPlayerChoice();
 
   if (player === "rock" || player === "paper" || player === "scissors") {
     let computer = numberToPlay();
-    // Call a function that compares player and computer.
+    let roundResult = comparePlays(player, computer);
+    return roundResult;
   } else {
     alert("Invalid play. Please try again");
+    return;
   }
 }
