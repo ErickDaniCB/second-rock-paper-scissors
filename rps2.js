@@ -27,8 +27,10 @@ function numberToPlay(number = randomNumber02()) {
 
 function getPlayerChoice() {
   let choice = prompt("Write your play! (Rock, paper or scissors)");
-  // console.log(choice.toLowerCase());
-  return choice.toLowerCase();
+  if (choice) {
+    return choice.toLowerCase();
+  }
+  return;
 }
 
 function comparePlays(playerPlay, computerPlay) {
@@ -72,21 +74,9 @@ function comparePlays(playerPlay, computerPlay) {
   }
 }
 
-function promptRoundWinner(result) {
-  switch (result) {
-    case 0:
-      console.log("Computer wins the round!");
-      break;
-    case 1:
-      console.log("Player wins the round!");
-    default:
-      console.log("Tie!");
-  }
-}
-
-function gameRound() {
+function getRoundResult() {
+  /* returns 0 (lose), 1 (win) or 2 (tie) */
   let player = getPlayerChoice();
-
   if (player === "rock" || player === "paper" || player === "scissors") {
     let computer = numberToPlay();
     let roundResult = comparePlays(player, computer);
@@ -95,4 +85,38 @@ function gameRound() {
     alert("Invalid play. Please try again");
     return;
   }
+}
+
+function logScore(score1, score2) {
+	console.log(`
+		Score 
+		Player: ${score1}
+		Computer: ${score2}
+		`)
+}
+
+function startGame() {
+  let pScore = 0;
+  let cScore = 0;
+	logScore(pScore, cScore);
+  // Check scores
+	while (pScore !== 3 && cScore !== 3) {
+		let result = getRoundResult();
+		switch (result) {
+			case 0:
+				console.log("Computer wins the round!");
+				++cScore;
+				break;
+				case 1:
+      console.log("Player wins the round!");
+      ++pScore;
+      break;
+			case 2:
+				console.log("Tie!");
+				break;
+				default:
+					console.log("Canceled");
+				}
+		logScore(pScore, cScore);
+	}
 }
