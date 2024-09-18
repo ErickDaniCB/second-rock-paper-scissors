@@ -119,4 +119,10 @@ function startGame() {
 				}
 		logScore(pScore, cScore);
 	}
+	if(pScore === 3){
+		console.log(`You Won The Game!`);
+	}
+	if (cScore === 3) {
+		console.log(`Computer Won The Game!`);
+	}
 }
