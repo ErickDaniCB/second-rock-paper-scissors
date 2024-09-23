@@ -25,13 +25,13 @@ function numberToPlay(number = randomNumber02()) {
   return play;
 }
 
-function getPlayerChoice() {
-  let choice = prompt("Write your play! (Rock, paper or scissors)");
-  if (choice) {
-    return choice.toLowerCase();
-  }
-  return;
-}
+// function getPlayerChoice() {
+//   let choice = prompt("Write your play! (Rock, paper or scissors)");
+//   if (choice) {
+//     return choice.toLowerCase();
+//   }
+//   return;
+// }
 
 function comparePlays(playerPlay, computerPlay) {
   switch (playerPlay) {
@@ -74,9 +74,9 @@ function comparePlays(playerPlay, computerPlay) {
   }
 }
 
-function getRoundResult() {
+function getRoundResult(player) {
   /* returns 0 (lose), 1 (win) or 2 (tie) */
-  let player = getPlayerChoice();
+  // let player = getPlayerChoice();
   if (player === "rock" || player === "paper" || player === "scissors") {
     let computer = numberToPlay();
     let roundResult = comparePlays(player, computer);
@@ -87,21 +87,20 @@ function getRoundResult() {
   }
 }
 
-function logScore(score1, score2) {
-  console.log(`
-		Score 
-		Player: ${score1}
-		Computer: ${score2}
-		`);
-}
+// function logScore(score1, score2) {
+//   console.log(`
+// 		Score 
+// 		Player: ${score1}
+// 		Computer: ${score2}
+// 		`);
+// }
 
-function startGame() {
+function startGame(result) {
   let pScore = 0;
   let cScore = 0;
-  logScore(pScore, cScore);
+  // logScore(pScore, cScore);
   // Check scores
-  while (pScore !== 3 && cScore !== 3) {
-    let result = getRoundResult();
+  if (pScore !== 3 && cScore !== 3) {
     switch (result) {
       case 0:
         console.log("Computer wins the round!");
@@ -117,7 +116,7 @@ function startGame() {
       default:
         console.log("Canceled");
     }
-    logScore(pScore, cScore);
+    // logScore(pScore, cScore);
   }
   if (pScore === 3) {
     console.log(`You Won The Game!`);
@@ -139,24 +138,14 @@ function roundCounter() {
 
 function createPlayListeners() {
   plays.addEventListener("click", (event) => {
-    event.preventDefault()
-    let target = event.target;
-
-    switch (target.id) {
-      case "rock":
-        console.log("rock!");
-        break;
-      case "paper":
-        console.log("paper!");
-        break;
-      case "scissors":
-        console.log("scissors!");
-        break;
-    }
+    event.preventDefault();
+    const target = event.target;
+    const result = getRoundResult(target.id)
+    startGame(result);
+    roundCounter();
   });
 }
 
 startGameBtn.addEventListener("click", () => {
-  createPlayListeners()
-  startGameBtn.textContent = "Restart";
+  createPlayListeners();
 });
