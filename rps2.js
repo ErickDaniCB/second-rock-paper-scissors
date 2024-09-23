@@ -130,7 +130,7 @@ function startGame(result) {
 
 const startGameBtn = document.querySelector(".start");
 const roundNum = document.querySelector(".roundNum");
-const prompt = document.querySelector(".prompt");
+const promptRound = document.querySelector(".prompt");
 const plays = document.querySelector(".plays");
 const player = document.querySelector(".playerScore");
 const computer = document.querySelector(".computerScore");
@@ -148,18 +148,23 @@ function createPlayListeners() {
     const result = getRoundResult(target.id);
     switch (result) {
       case 0:
-        roundCounter();
         computerScore += 1;
         computer.textContent = computerScore;
-        prompt.textContent = "Round lost"
+        promptRound.textContent = "Round lost";
         break;
       case 1:
-        roundCounter();
         playerScore += 1;
         player.textContent = playerScore;
-        prompt.textContent = "You won"
-      case 2: 
-        prompt.textContent = "Tie!"
+        promptRound.textContent = "You won";
+      case 2:
+        promptRound.textContent = "Tie!";
+    }
+    if (playerScore === 3) {
+      promptRound.textContent = "Game Finished. You won!"
+    } else if(computerScore === 3) {
+      promptRound.textContent = "Game Finished. Computer won!"
+    } else {
+      roundCounter();
     }
   });
 }
