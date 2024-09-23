@@ -88,41 +88,75 @@ function getRoundResult() {
 }
 
 function logScore(score1, score2) {
-	console.log(`
+  console.log(`
 		Score 
 		Player: ${score1}
 		Computer: ${score2}
-		`)
+		`);
 }
 
 function startGame() {
   let pScore = 0;
   let cScore = 0;
-	logScore(pScore, cScore);
+  logScore(pScore, cScore);
   // Check scores
-	while (pScore !== 3 && cScore !== 3) {
-		let result = getRoundResult();
-		switch (result) {
-			case 0:
-				console.log("Computer wins the round!");
-				++cScore;
-				break;
-				case 1:
-      console.log("Player wins the round!");
-      ++pScore;
-      break;
-			case 2:
-				console.log("Tie!");
-				break;
-				default:
-					console.log("Canceled");
-				}
-		logScore(pScore, cScore);
-	}
-	if(pScore === 3){
-		console.log(`You Won The Game!`);
-	}
-	if (cScore === 3) {
-		console.log(`Computer Won The Game!`);
-	}
+  while (pScore !== 3 && cScore !== 3) {
+    let result = getRoundResult();
+    switch (result) {
+      case 0:
+        console.log("Computer wins the round!");
+        ++cScore;
+        break;
+      case 1:
+        console.log("Player wins the round!");
+        ++pScore;
+        break;
+      case 2:
+        console.log("Tie!");
+        break;
+      default:
+        console.log("Canceled");
+    }
+    logScore(pScore, cScore);
+  }
+  if (pScore === 3) {
+    console.log(`You Won The Game!`);
+  }
+  if (cScore === 3) {
+    console.log(`Computer Won The Game!`);
+  }
 }
+
+///////////////////////// UI /////////////////////////
+
+const startGameBtn = document.querySelector(".start");
+const roundNum = document.querySelector(".roundNum");
+const plays = document.querySelector(".plays");
+
+function roundCounter() {
+  roundNum.textContent++;
+}
+
+function createPlayListeners() {
+  plays.addEventListener("click", (event) => {
+    event.preventDefault()
+    let target = event.target;
+
+    switch (target.id) {
+      case "rock":
+        console.log("rock!");
+        break;
+      case "paper":
+        console.log("paper!");
+        break;
+      case "scissors":
+        console.log("scissors!");
+        break;
+    }
+  });
+}
+
+startGameBtn.addEventListener("click", () => {
+  createPlayListeners()
+  startGameBtn.textContent = "Restart";
+});
