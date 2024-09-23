@@ -89,7 +89,7 @@ function getRoundResult(player) {
 
 // function logScore(score1, score2) {
 //   console.log(`
-// 		Score 
+// 		Score
 // 		Player: ${score1}
 // 		Computer: ${score2}
 // 		`);
@@ -130,7 +130,12 @@ function startGame(result) {
 
 const startGameBtn = document.querySelector(".start");
 const roundNum = document.querySelector(".roundNum");
+const prompt = document.querySelector(".prompt");
 const plays = document.querySelector(".plays");
+const player = document.querySelector(".playerScore");
+const computer = document.querySelector(".computerScore");
+let playerScore = 0;
+let computerScore = 0;
 
 function roundCounter() {
   roundNum.textContent++;
@@ -140,9 +145,22 @@ function createPlayListeners() {
   plays.addEventListener("click", (event) => {
     event.preventDefault();
     const target = event.target;
-    const result = getRoundResult(target.id)
-    startGame(result);
-    roundCounter();
+    const result = getRoundResult(target.id);
+    switch (result) {
+      case 0:
+        roundCounter();
+        computerScore += 1;
+        computer.textContent = computerScore;
+        prompt.textContent = "Round lost"
+        break;
+      case 1:
+        roundCounter();
+        playerScore += 1;
+        player.textContent = playerScore;
+        prompt.textContent = "You won"
+      case 2: 
+        prompt.textContent = "Tie!"
+    }
   });
 }
 
